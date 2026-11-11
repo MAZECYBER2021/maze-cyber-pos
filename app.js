@@ -23,8 +23,9 @@ function apiCall(payload){
     const input=document.createElement('input');input.type='hidden';input.name='payload';input.value=JSON.stringify({...payload,nonce,origin:location.origin});form.appendChild(input);
     let done=false;const timer=setTimeout(()=>finish(new Error('The Google Sheets server did not respond. Check internet or deployment settings.')),25000);
     function finish(err,data){if(done)return;done=true;clearTimeout(timer);window.removeEventListener('message',onMessage);form.remove();iframe.remove();err?reject(err):resolve(data);}
-    function onMessage(ev){if(ev.source!==iframe.contentWindow||!ev.data||ev.data.nonce!==nonce)return;const res=ev.data.result;if(!res?.ok)finish(new Error(res?.error||'Server request failed.'));else finish(null,res.data);}
-    window.addEventListener('message',onMessage);document.body.append(iframe,form);form.submit();
+    function onMessage(ev){if(!ev.data||ev.data.nonce!==nonce)return;const res=ev.data.result;if(!res?.ok)finish(new Error(res?.error||'Server request failed.'));else finish(null,res.data);}
+window.addEventListener('message',onMessage);document.body.append(iframe,form);form.submit();
+
   });
 }
 async function deriveLocalHash(password,salt){const enc=new TextEncoder();const key=await crypto.subtle.importKey('raw',enc.encode(password),'PBKDF2',false,['deriveBits']);const bits=await crypto.subtle.deriveBits({name:'PBKDF2',salt:enc.encode(salt),iterations:150000,hash:'SHA-256'},key,256);return [...new Uint8Array(bits)].map(x=>x.toString(16).padStart(2,'0')).join('');}
