@@ -1,0 +1,10 @@
+{
+  "name": "MAZE CYBER POS",
+  "short_name": "MAZE POS",
+  "description": "Offline-first service POS for MAZE CYBER",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0b0b0d",
+  "theme_color": "#0b0b0d",
+  "icons": []
+}

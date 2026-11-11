@@ -1,0 +1,10 @@
+Pre-deployment checks performed in this build:
+- Catalogue extracted from the uploaded workbook: 103 active service rows.
+- Browser JavaScript syntax checked with Node.js.
+- Apps Script backend is designed for V8 runtime.
+
+Not yet verified in this environment:
+- Actual Apps Script deployment, Google authorization, Sheet writes, Drive backups, cross-origin iframe bridge, and synchronization across separate physical computers.
+- Those require the user's Google account, converted Google Sheet, published PWA origin, and Apps Script deployment URL.
+
+Do not enter live financial transactions until the README test checklist has passed.
